@@ -79,17 +79,17 @@ def S(etat, action):
 	if (action == 'Rester' and norme1(j2) >= 1 and m == 1) or ((action == 'Tirer' or action == 'Doubler') and m == 2):
 		S = []
 		for carte in range(10):
-			pioche = etat[1].copy()
+			pioche = etat[0].copy()
 			j2 = j2.copy()
-			if pioche[i] >= 1:
-				pioche[i] -= 1
-				j2[i] += 1
+			if pioche[carte] >= 1:
+				pioche[carte] -= 1
+				j2[carte] += 1
 				S.append([pioche, j1, j2, c, d, 2])
 		return S
 	elif action == 'Rester':
 		S = []
 		for carte in range(10):
-			pioche = etat[1].copy()
+			pioche = etat[0].copy()
 			c = c.copy()
 			if pioche[carte] >= 1:
 				pioche[carte] -= 1
@@ -99,11 +99,11 @@ def S(etat, action):
 	elif action == 'Doubler' or action == 'Tirer':
 		S = []
 		for carte in range(10):
-			pioche = etat[1].copy()
+			pioche = etat[0].copy()
 			j1 = j1.copy()
-			if pioche[i] >= 1:
-				pioche[i] -= 1
-				j1[i] += 1
+			if pioche[carte] >= 1:
+				pioche[carte] -= 1
+				j1[carte] += 1
 				S.append([pioche, j1, j2, c, d, m])
 		return S
 	else: #Event of a split
@@ -127,30 +127,35 @@ def est_une_paire(main):
 		return False
 
 def theta_max(etat):
+	DEBUG(etat)
 	j1 = etat[1]
 	j2 = etat[2]
 	c = etat[3]
 	d = etat[4]
 	m = etat[5]
 	A = ['Rester']
-	
-	if norme1(c) == 1 and ((valeur(j1) <= 20 and m == 1) or (valeur(j2) <= 20 and m == 2) ) :
-		A.append('Tirer')
-		if (d[1] == False and m == 1) or (d[2] == False and m == 2):
-			A.append('Doubler')
-		if norme1(j2) == 0 and est_une_paire(j1) :
-			A.append('Split')
-	
-	A_resultats = {}
-	
-	for action in A:
 
-		somme = 0
-		for etat2 in S(etat, action):
-			somme += fonction_de_transition(etat, etat2)*theta_max(etat2)[1]
-		A_resultats[action] = somme
+	if valeur(c) >= 17: #Cas de base
+		return ['Rester' ,retour(etat)]
+	else: #Cas récursif
+	
+		if norme1(c) == 1 and ((valeur(j1) <= 20 and m == 1) or (valeur(j2) <= 20 and m == 2) ) :
+			A.append('Tirer')
+			if (d[1] == False and m == 1) or (d[2] == False and m == 2):
+				A.append('Doubler')
+			if norme1(j2) == 0 and est_une_paire(j1) :
+				A.append('Split')
+		
+		A_resultats = {}
+		
+		for action in A:
 
-	return max(A_resultats.items(), key=lambda x: x[1])
+			somme = 0
+			for etat2 in S(etat, action):
+				somme += fonction_de_transition(etat, etat2)*theta_max(etat2)[1]
+			A_resultats[action] = somme
+
+		return max(A_resultats.items(), key=lambda x: x[1])
 
 
 
@@ -161,14 +166,16 @@ def DEBUG(variable):
 
 def TEST():
 	pioche1 = [4,4,4,4,4,4,4,4,4,16]
-	j11 = [0,0,0,0,0,1,0,0,0,1]
+	j11 = [0,0,0,0,1,0,0,0,0,1]
 	j21 = [0]*10
-	c1 = [0,0,0,0,0,0,1,0,0,0]
+	c1 = [0,0,0,0,0,0,0,0,0,1]
 	d1 = [False, False]
 	m1 = 1
 
 	etat1 = [pioche1, j11, j21, c1, d1, m1]
-	
+
+	#DEBUG(S(etat1, 'Rester'))
+
 	pioche2 = [4,4,4,4,4,4,4,4,3,16]
 	j12 = [0,1,1,0,0,0,0,0,1,0]
 	j22 = [0]*10
@@ -179,5 +186,6 @@ def TEST():
 	etat2 = [pioche2, j12, j22, c2, d2, m2]
 
 	print(theta_max(etat1))
+
 
 TEST()

@@ -73,7 +73,7 @@ def S(etat, action):
     else:
         d = False
     m = etat[5]
-    if (action == 'Rester' and norm1(j1) >= 1 and m == 1) or ((action == 'Tirer' or action == 'Doubler') and m == 2):
+    if (action == 'Rester' and norm1(j2) >= 1 and m == 1) or ((action == 'Tirer' or action == 'Doubler') and m == 2):
         S = []
         for carte in range(10):
             pioche = etat[1].copy()
@@ -117,6 +117,26 @@ def S(etat, action):
                 i += 1
         return [[pioche, j1, j2, c, d, m]]
 
+def est_une_paire(main):
+    if norm1(main) == 2 and 2 in main:
+        return True
+    else:
+        return False
+
+def theta_max(etat):
+    j1 = etat[1]
+    j2 = etat[2]
+    c = etat[3]
+    d = etat[4]
+    A = ['Rester']
+    
+    if norm1(c) == 1 and ((valeur(j1) <= 20 and m == 1) or (valeur(j2) <= 20 and m == 2) ) :
+        A.append('Tirer')
+        if (d[1] == False and m == 1) or (d[2] == False and m == 2):
+            A.append('Doubler')
+        if norm1(j2) == 0 and est_une_paire(j1) :
+            A.append('Split')
+            #PIN A finir
 
 
 

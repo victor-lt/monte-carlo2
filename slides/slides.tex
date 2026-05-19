@@ -1,0 +1,152 @@
+\documentclass{beamer}
+\usepackage{amsmath, tikz, mathabx, MnSymbol}
+\usetikzlibrary{arrows.meta,graphs,graphdrawing}
+\usegdlibrary{layered}
+\nonstopmode
+
+\usetheme{Antibes}
+\usecolortheme{beaver}
+
+\title{Optimisation des gains au Blackjack}
+\author{Victor Lajoux-Thiebault}
+\date{2026}
+
+\begin{document}
+
+\section{Introduction}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+\section{Étude d'une manche}
+\subsection{Définitions}
+
+\begin{frame}{Variables du joueur}
+	On utilisera les notations suivantes:
+	\begin{itemize}
+		\item $p \in \mathbb{R}^{10} $ est le vecteur associé à la pioche. Chaque i-ème coordonnée représente la quantité de cartes avec une valeur i dans la pioche. \\{} e.g.  
+		La pioche à l'origine est $d = \left(\begin{smallmatrix} 4 \\ 4 \\ 4 \\ 4 \\ 4 \\ 4 \\ 4 \\ 4 \\ 4 \\ 16 \end{smallmatrix}\right)$.
+		\item $j_1, j_2 \in \mathbb{R}^{10}$ de la même manière sont les vecteur représentant la première main du joueur, et dans le cas d'un split, sa deuxième main.
+		\item $c \in \mathbb{R}^{10}$ représente la main du croupier. \\{} 
+		Lorsque $|c| := \sum c_i = 1$, il est noté $c^{*}$.
+	\end{itemize}
+\end{frame}
+	
+\begin{frame}{États du jeu}
+	\begin{itemize}
+		\item $A = \{\text{rester},\text{tirer}, \text{doubler}, \text{split} \}$ est l'ensemble des actions faisable par le joueur. Lorsque les règles forcent certaines actions, nous admetterons que le joueur joue l'action associé (souvent: Rester).
+		\item Une situation/état $s$ est un 4-uplet $(p, j_1, j_2, c, d, m)$ où $d$ est un booléen indiquant si le joueur a doublé ou pas, et $m \in \{1,2\}$ indiquant quelle main est en train d'être joué dans l'éventualité d'un split. Les états sont relié par les actions de $A$.
+		\item $S$ est l'ensemble des états du jeu.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{États du jeu}
+	On utilisera aussi les notations suivantes:
+	\begin{itemize}
+		\item $S^{p_0}$ l'ensemble des situations atteignables à partir d'une pioche d'origine $p_0$
+		\item $S(s_0)$ l'ensemble des situations atteignable à partir de l'état $s_0$.
+		\item $S_t^{p_0}$ l'ensemble des situations atteignable en effectuant $t$ actions à partir de la pioche d'origine $p_0$.
+		\item $S^F$ l'ensemble des situations où $c$ a au moins 16 points.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Fonction de transition probabiliste}
+
+	\begin{itemize}
+		\item Pour tout $(s,s',a) \in S\times S\times A$ on note $T_a(s,s')$ la probabilité de passer de la situation $s$ à $s'$ en effectuant l'action $a$.
+		\item Si $a \neq$ Split, $$T_a(s,s') = \frac{|p - p'|}{|p|}$$
+			sinon, $$T_{Split}(s,s') = 1$$ car il n'y a qu'une seule situation atteignable.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	Illustration à compléter.
+	\tikz [>={Stealth[round,sep]}]
+	\graph [layered layout, components go right top aligned, nodes={draw, circle}, edges=rounded corners]
+		{
+			s1 -> {rester[fill=red!50, draw=red, radius=5] -> {s2, s3, s4}, tirer[fill=red!50, draw=red, radius=5] -> {s5, s6, s7}, doubler[fill=red!50, draw=red, radius=5] -> {s5', s6', s7'}};
+		};
+\end{frame}
+
+\begin{frame}{Manche de jeu}
+	\begin{itemize}
+		\item Une stratégie est une fonction $\theta : S \rightarrow A$ qui définit l'action du joueur pour chaque situation.
+		\item Une manche $\mathcal{M}_{\theta}^{p_0}$ est une suite $(s_t)_{0\leq t \leq n}$ tel que $s_t \in S_t^{p_0}$ et $s_n$ est un état final.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Variable aléatoire d'intérêt}
+	Pour toute situation $s \in S^{p_0}$ on s'intéresse à la variable aléatoire qui renvoie le gain d'une manche $\mathcal{M}^{p_0}_\theta$ commençant par $s$. On la note : $$
+	Y_\theta^{(s=s_t)} = \begin{cases}
+		\mathcal{R}(s_t) \text{ si } s_t \in S^F \\
+		Y_\theta^{s_{t+1}} \text{ sinon}
+	\end{cases}
+	$$
+	où $\mathcal{R}(s_t) \in \{-2, -1, 0, 1, 1.5, 2\}$ selon les règles établient plus tôt. \\
+	
+	En particulier, pour un état initial $s_0$, celui-ci est entièrement déterminé par $p_0$, on note ainsi:
+	$$ X_\theta^{p_0} = Y_\theta^{s_0} $$
+
+\end{frame}
+
+\subsection{Optimisation}
+
+\begin{frame}{Encodage du problème}
+	Le but du problème est alors pour une pioche $p_0$ donnée, trouver $\theta^*$ tel que $\mathbb{E}[X_{\theta^*}^{p_0}]$ est maximal.
+	L'existence d'une stratégie maximale est donnée par le caractére fini de l'ensemble $S \times A$.
+\end{frame}
+
+\begin{frame}{Encodage du problème}
+	Soit $\theta, p_0$ et $s_t$. 
+	\[
+		\mathbb{E}[Y_\theta^{s_t}] &= \sum_{\substack{(s_t, \dots, s_n) \\ \text{une manche}}} \mathbb{P}(s_{t+1}, \dots, s_n \,|\, s_t) \mathcal{R}(s_n)
+	\]
+	Or, par distributivité de l'union sur le produit cartésien
+	\begin{align*}
+		\bigtimes_{k=t+1}^n S_k &= \left( \bigcupdot_{s \in S_{t+1}} \{s\} \right) \bigtimes_{k=t+2}^n S_k
+		&= \bigcupdot_{s \in S_{t+1}} \left( \{s\} \bigtimes_{k=t+2}^n S_k \right)
+	\end{align*}
+	donc par la formule des probabilités totales
+	\[ 
+		\mathbb{P}(s_{t+1}, \dots, s_n) = \sum_{s \in S_{t+1}} \mathbb{P}(s_{t+1} = s) \mathbb{P}(s_{t+2}, \dots, s_n \,|\,  s_t, s_{t+1} = s)
+	\]
+
+\end{frame}
+
+\begin{frame}
+	Ainsi, les sommes étant bien finies
+	\begin{align*}
+		\mathbb{E}[Y_\theta^{s_t}] &= \sum_{\substack{(s_t, \dots, s_n) \\ \text{une manche}}} \sum_{s \in S_{t+1}} \mathbb{P}(s_{t+1} = s) \mathbb{P}(s_{t+2}, \dots, s_n \,|\, s_{t+1}) \mathcal{R}(s_n) \\
+		&=  \sum_{s \in S_{t+1}} \mathbb{P}(s \,|\, s_t) \sum_{\substack{(s_t, s, s_{t+2} \dots, s_n) \\ \text{une manche}}} \mathbb{P}(s_{t+2}, \dots, s_n \,|\, s_{t+1}) \mathcal{R}(s_n) \\
+		&= \sum_{s \in S_{t+1}} \mathbb{P}(s \,|\, s_t) \mathbb{E}[Y_\theta^{s_{t+1}}] \\
+		&= \sum_{s \in S_{t+1}} T_{\theta(s_t)}(s_t, s) \mathbb{E}[Y_\theta^{s_{t+1}}]
+	\end{align*}
+\end{frame}
+
+\begin{frame}
+	D'où la relation de récurrence suivante : 
+	\[\boxed{
+		\mathbb{E}[Y_\theta^{s_t}] &= \sum_{s \in S_{t+1}} T_{\theta(s_t)}(s_t, s) \mathbb{E}[Y_\theta^{s_{t+1}}]
+	}\]
+	On remarque alors que $\mathbb{E}[Y_{\theta}^{s_t}]$ est maximale seulement si tout les $\mathbb{E}[Y_{\theta}^{s_{t+1}}]$ sont maximales.
+\end{frame}
+
+\begin{frame}
+	On en déduit les relations de récurrences : 
+		\[
+			\theta^*(s_t) = \text{arg}\max_{a \in A} \sum_{s \in S_{t+1}} T_{a}(s_t, s) \mathbb{E}[Y_{\theta^*}^{s_{t+1}}]
+		\]
+		et 
+		\[
+			\mathbb{E}[Y_{\theta^*}^{s_t}] &= \max_{a \in A} \sum_{s \in S_{t+1}} T_{a}(s_t, s) \mathbb{E}[Y_{\theta^*}^{s_{t+1}}]
+		\]
+			
+\end{frame}
+
+\end{document}

@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{Introduction}{1}{0}{1}
+\beamer@sectionintoc {2}{Étude d'une manche}{3}{0}{2}
+\beamer@subsectionintoc {2}{1}{Définitions}{3}{0}{2}
+\beamer@subsectionintoc {2}{2}{Optimisation}{10}{0}{2}

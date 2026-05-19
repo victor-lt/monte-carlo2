@@ -20,11 +20,13 @@
 \end{frame}
 
 \begin{frame}{Outline}
+	\setcounter{tocdepth}{2}
 	\tableofcontents
 \end{frame}
 
 \section{Étude d'une manche}
 \subsection{Définitions}
+\subsubsection{Variables du joueur}
 
 \begin{frame}{Variables du joueur}
 	On utilisera les notations suivantes:
@@ -36,16 +38,18 @@
 		Lorsque $|c| := \sum c_i = 1$, il est noté $c^{*}$.
 	\end{itemize}
 \end{frame}
-	
+
+\subsubsection{États du jeu}
+
 \begin{frame}{États du jeu}
 	\begin{itemize}
 		\item $A = \{\text{rester},\text{tirer}, \text{doubler}, \text{split} \}$ est l'ensemble des actions faisable par le joueur. Lorsque les règles forcent certaines actions, nous admetterons que le joueur joue l'action associé (souvent: Rester).
-		\item Une situation/état $s$ est un 4-uplet $(p, j_1, j_2, c, d, m)$ où $d$ est un booléen indiquant si le joueur a doublé ou pas, et $m \in \{1,2\}$ indiquant quelle main est en train d'être joué dans l'éventualité d'un split. Les états sont relié par les actions de $A$.
+		\item Une situation/état $s$ est un 4-uplet $(p, j_1, j_2, c, d, m)$ où $d$ est un 2-uplet de booléen indiquant si le joueur a doublé sur sa i-ème main ou pas, et $m \in \{1,2\}$ indiquant quelle main est en train d'être joué dans l'éventualité d'un split. Les états sont relié par les actions de $A$.
 		\item $S$ est l'ensemble des états du jeu.
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{États du jeu}
+\begin{frame}
 	On utilisera aussi les notations suivantes:
 	\begin{itemize}
 		\item $S^{p_0}$ l'ensemble des situations atteignables à partir d'une pioche d'origine $p_0$
@@ -55,11 +59,13 @@
 	\end{itemize}
 \end{frame}
 
+\subsubsection{Fonction de transition probabiliste}
+
 \begin{frame}{Fonction de transition probabiliste}
 
 	\begin{itemize}
 		\item Pour tout $(s,s',a) \in S\times S\times A$ on note $T_a(s,s')$ la probabilité de passer de la situation $s$ à $s'$ en effectuant l'action $a$.
-		\item Si $a \neq$ Split, $$T_a(s,s') = \frac{|p - p'|}{|p|}$$
+		\item Si $a \neq$ Split, $$T_a(s,s') = \frac{|p\cdot (p - p')|}{|p|}$$
 			sinon, $$T_{Split}(s,s') = 1$$ car il n'y a qu'une seule situation atteignable.
 	\end{itemize}
 \end{frame}
@@ -74,12 +80,16 @@
 		};
 \end{frame}
 
+\subsubsection{Manche de jeu}
+
 \begin{frame}{Manche de jeu}
 	\begin{itemize}
 		\item Une stratégie est une fonction $\theta : S \rightarrow A$ qui définit l'action du joueur pour chaque situation.
 		\item Une manche $\mathcal{M}_{\theta}^{p_0}$ est une suite $(s_t)_{0\leq t \leq n}$ tel que $s_t \in S_t^{p_0}$ et $s_n$ est un état final.
 	\end{itemize}
 \end{frame}
+
+\subsubsection{Variable aléatoire d'intérêt}
 
 \begin{frame}{Variable aléatoire d'intérêt}
 	Pour toute situation $s \in S^{p_0}$ on s'intéresse à la variable aléatoire qui renvoie le gain d'une manche $\mathcal{M}^{p_0}_\theta$ commençant par $s$. On la note : $$
@@ -97,12 +107,14 @@
 
 \subsection{Optimisation}
 
-\begin{frame}{Encodage du problème}
+\subsubsection{Mise en équation du problème}
+
+\begin{frame}{Mise en équation du problème}
 	Le but du problème est alors pour une pioche $p_0$ donnée, trouver $\theta^*$ tel que $\mathbb{E}[X_{\theta^*}^{p_0}]$ est maximal.
 	L'existence d'une stratégie maximale est donnée par le caractére fini de l'ensemble $S \times A$.
 \end{frame}
 
-\begin{frame}{Encodage du problème}
+\begin{frame}
 	Soit $\theta, p_0$ et $s_t$. 
 	\[
 		\mathbb{E}[Y_\theta^{s_t}] &= \sum_{\substack{(s_t, \dots, s_n) \\ \text{une manche}}} \mathbb{P}(s_{t+1}, \dots, s_n \,|\, s_t) \mathcal{R}(s_n)
@@ -131,22 +143,39 @@
 
 \begin{frame}
 	D'où la relation de récurrence suivante : 
-	\[\boxed{
+	\[
 		\mathbb{E}[Y_\theta^{s_t}] &= \sum_{s \in S_{t+1}} T_{\theta(s_t)}(s_t, s) \mathbb{E}[Y_\theta^{s_{t+1}}]
-	}\]
+	\]
 	On remarque alors que $\mathbb{E}[Y_{\theta}^{s_t}]$ est maximale seulement si tout les $\mathbb{E}[Y_{\theta}^{s_{t+1}}]$ sont maximales.
 \end{frame}
 
 \begin{frame}
 	On en déduit les relations de récurrences : 
 		\[
+			\boxed{
 			\theta^*(s_t) = \text{arg}\max_{a \in A} \sum_{s \in S_{t+1}} T_{a}(s_t, s) \mathbb{E}[Y_{\theta^*}^{s_{t+1}}]
+			}
 		\]
 		et 
-		\[
+		\[	
+			\boxed{
 			\mathbb{E}[Y_{\theta^*}^{s_t}] &= \max_{a \in A} \sum_{s \in S_{t+1}} T_{a}(s_t, s) \mathbb{E}[Y_{\theta^*}^{s_{t+1}}]
+			}
 		\]
 			
+\end{frame}
+
+\subsection{Implémentation informatique}
+
+\subsubsection{Analyse de la complexité}
+
+\begin{frame}{Analyse de la complexité}
+	Il suffit alors de calculer $\theta^*$ de manière récursive. Mais alors, combiens il y a t-il d'appel récursif?
+\end{frame}
+
+\begin{frame}
+	Pour $s \in S$, quelle est le cardinal de $ S_a(s) $ ?
+	On suppose la présence d'au moins une carte de chaque valeur dans la pioche.
 \end{frame}
 
 \end{document}

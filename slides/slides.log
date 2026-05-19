@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.5.18)  19 MAY 2026 09:03
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.5.18)  19 MAY 2026 17:39
  restricted system commands enabled.
 **slides.tex
 (./slides.tex
@@ -1345,23 +1345,23 @@ LaTeX Info: Command `\ddddot' is already robust on input line 14.
 (./slides.toc) [2
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 38.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 40.
 
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 38.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 40.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 38.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 40.
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 38.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 40.
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <6> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 38.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 40.
  [3
 
 ] [4
@@ -1383,7 +1383,7 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <6> not available
 ! Misplaced alignment tab character &.
 \beamer@doifinframe ...thbb {E}[Y_\theta ^{s_t}] &
                                                   = \sum _{\substack {(s_t, ...
-l.120 \end{frame}
+l.132 \end{frame}
                  
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1398,9 +1398,9 @@ might try typing `S' now just to see what is salvageable.
 
 ]
 ! Misplaced alignment tab character &.
-<argument> ...tyle  \mathbb {E}[Y_\theta ^{s_t}] &
+\beamer@doifinframe ...thbb {E}[Y_\theta ^{s_t}] &
                                                   = \sum _{s \in S_{t+1}} T_...
-l.138 \end{frame}
+l.150 \end{frame}
                  
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1413,9 +1413,9 @@ might try typing `S' now just to see what is salvageable.
 
 ]
 ! Misplaced alignment tab character &.
-\beamer@doifinframe ... {E}[Y_{\theta ^*}^{s_t}] &
+<argument> ...  \mathbb {E}[Y_{\theta ^*}^{s_t}] &
                                                   = \max _{a \in A} \sum _{s...
-l.150 \end{frame}
+l.166 \end{frame}
                  
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1425,6 +1425,10 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 [14
+
+] [15
+
+] [16
 
 ]
 \tf@nav=\write6
@@ -1442,19 +1446,19 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `slides.out' has not changed.
-(rerunfilecheck)             Checksum: E20CB4C25F5ACB83AA170FD1746E5606;478.
+(rerunfilecheck)             Checksum: 36FDF8D4EEFF961361533DA34008021F;245.
 )
 
 Here is how much of LuaTeX's memory you used:
- 30196 strings out of 476076
+ 30219 strings out of 476076
  125016,1144653 words of node,token memory allocated
- 4342 words of node memory still in use:
-   76 hlist, 18 vlist, 9 rule, 13 disc, 7 local_par, 91 glue, 38 kern, 18 penalt
-y, 192 glyph, 110 attribute, 61 glue_spec, 110 attribute_list, 4 write, 3 pdf_st
-art_link, 3 pdf_end_link, 3 pdf_action, 32 pdf_colorstack nodes
-   avail lists: 1:9,2:2376,3:1683,4:327,5:248,6:61,7:2679,8:54,9:870,10:14,11:13
-0
- 51780 multiletter control sequences out of 65536+600000
+ 3783 words of node memory still in use:
+   43 hlist, 11 vlist, 9 rule, 16 disc, 6 local_par, 4 math, 82 glue, 20 kern, 1
+5 penalty, 188 glyph, 94 attribute, 61 glue_spec, 94 attribute_list, 4 write, 3 
+pdf_start_link, 3 pdf_end_link, 3 pdf_action, 32 pdf_colorstack nodes
+   avail lists: 1:9,2:2408,3:1686,4:327,5:254,6:62,7:2688,8:54,9:910,10:15,11:12
+7
+ 51791 multiletter control sequences out of 65536+600000
  66 fonts using 4934207 bytes
  128i,18n,116p,425b,1576s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/share/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolC.enc}{/usr/share/texmf-
@@ -1472,10 +1476,10 @@ ist/fonts/type1/public/mnsymbol/MnSymbol6.pfb></usr/share/texmf-dist/fonts/type1
 s/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb>
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/tex
 mf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on slides.pdf (14 pages, 132066 bytes).
+Output written on slides.pdf (16 pages, 136971 bytes).
 
-PDF statistics: 627 PDF objects out of 1000 (max. 8388607)
- 485 compressed objects within 5 object streams
- 33 named destinations out of 1000 (max. 1048576)
- 48 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 703 PDF objects out of 1000 (max. 8388607)
+ 544 compressed objects within 6 object streams
+ 45 named destinations out of 1000 (max. 1048576)
+ 32 words of extra memory for PDF output out of 10000 (max. 100000000)
 

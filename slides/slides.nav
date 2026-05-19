@@ -10,22 +10,28 @@
 \headcommand {\sectionentry {2}{Étude d'une manche}{3}{Étude d'une manche}{0}}
 \headcommand {\beamer@subsectionpages {3}{2}}
 \headcommand {\beamer@subsectionentry {0}{2}{1}{3}{Définitions}}
+\headcommand {\beamer@subsubsectionentry {0}{2}{1}{1}{3}{Variables du joueur}}
 \headcommand {\slideentry {2}{1}{1}{3/3}{Définitions}{0}}
 \headcommand {\beamer@framepages {3}{3}}
+\headcommand {\beamer@subsubsectionentry {0}{2}{1}{2}{4}{États du jeu}}
 \headcommand {\slideentry {2}{1}{2}{4/4}{Définitions}{0}}
 \headcommand {\beamer@framepages {4}{4}}
 \headcommand {\slideentry {2}{1}{3}{5/5}{Définitions}{0}}
 \headcommand {\beamer@framepages {5}{5}}
+\headcommand {\beamer@subsubsectionentry {0}{2}{1}{3}{6}{Fonction de transition probabiliste}}
 \headcommand {\slideentry {2}{1}{4}{6/6}{Définitions}{0}}
 \headcommand {\beamer@framepages {6}{6}}
 \headcommand {\slideentry {2}{1}{5}{7/7}{Définitions}{0}}
 \headcommand {\beamer@framepages {7}{7}}
+\headcommand {\beamer@subsubsectionentry {0}{2}{1}{4}{8}{Manche de jeu}}
 \headcommand {\slideentry {2}{1}{6}{8/8}{Définitions}{0}}
 \headcommand {\beamer@framepages {8}{8}}
+\headcommand {\beamer@subsubsectionentry {0}{2}{1}{5}{9}{Variable aléatoire d'intérêt}}
 \headcommand {\slideentry {2}{1}{7}{9/9}{Définitions}{0}}
 \headcommand {\beamer@framepages {9}{9}}
 \headcommand {\beamer@subsectionpages {3}{9}}
 \headcommand {\beamer@subsectionentry {0}{2}{2}{10}{Optimisation}}
+\headcommand {\beamer@subsubsectionentry {0}{2}{2}{1}{10}{Mise en équation du problème}}
 \headcommand {\slideentry {2}{2}{1}{10/10}{Optimisation}{0}}
 \headcommand {\beamer@framepages {10}{10}}
 \headcommand {\slideentry {2}{2}{2}{11/11}{Optimisation}{0}}
@@ -36,8 +42,15 @@
 \headcommand {\beamer@framepages {13}{13}}
 \headcommand {\slideentry {2}{2}{5}{14/14}{Optimisation}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\beamer@partpages {1}{14}}
 \headcommand {\beamer@subsectionpages {10}{14}}
-\headcommand {\beamer@sectionpages {3}{14}}
-\headcommand {\beamer@documentpages {14}}
-\headcommand {\gdef \inserttotalframenumber {14}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{15}{Implémentation informatique}}
+\headcommand {\beamer@subsubsectionentry {0}{2}{3}{1}{15}{Analyse de la complexité}}
+\headcommand {\slideentry {2}{3}{1}{15/15}{Implémentation informatique}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\slideentry {2}{3}{2}{16/16}{Implémentation informatique}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\beamer@partpages {1}{16}}
+\headcommand {\beamer@subsectionpages {15}{16}}
+\headcommand {\beamer@sectionpages {3}{16}}
+\headcommand {\beamer@documentpages {16}}
+\headcommand {\gdef \inserttotalframenumber {16}}

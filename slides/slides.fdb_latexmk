@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1779174207.12212 "slides.tex" "slides.pdf" "slides" 1779174209.41936 2
+["pdflatex"] 1779205186.45202 "slides.tex" "slides.pdf" "slides" 1779205188.78975 2
   "/home/vlt/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1779093830.93822 127314 7c5efae986e60281c7ad546cf8ed9a14 ""
   "/home/vlt/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmsans10-oblique.luc" 1779093832.11022 126481 79266833750367b5187fe205c6b9b13b ""
   "/home/vlt/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmsans10-regular.luc" 1779093831.41522 127633 016a4c28e10eb59270470cc7dce3ce79 ""
@@ -360,11 +360,11 @@
   "/usr/share/texmf-dist/tex/luatex/luaotfload/luaotfload.lua" 1775415801 13566 16df94dd2de231b2bca0aaa0190941fe ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1778770234 5385779 47c0c393a77fd4a098bacfd57d66b88a ""
   "/var/lib/texmf/web2c/luahbtex/lualatex.fmt" 1779093300 5657623 66fa45e46536d28f94712504e9c989be ""
-  "slides.aux" 1779174209.14889 3393 7ca35e89950a69fdcc9366817a12b480 "pdflatex"
-  "slides.nav" 1779174209.1491 2172 647b48785efface05e38069bf7ba0682 "pdflatex"
-  "slides.out" 1779174209.1491 478 e20cb4c25f5acb83aa170fd1746e5606 "pdflatex"
-  "slides.tex" 1779174206.3521 6444 29eb96959647b0f3b8bd08ac7bcf55c0 ""
-  "slides.toc" 1779174209.1491 212 88f5e9fbabeeab500f5f2f3089e338e4 "pdflatex"
+  "slides.aux" 1779205188.52659 5305 781eb1df597ce548f810d81f74624860 "pdflatex"
+  "slides.nav" 1779205188.52759 3131 24e6f44049ff997237290a10672bc6fa "pdflatex"
+  "slides.out" 1779205188.52659 245 36fdf8d4eeff961361533da34008021f "pdflatex"
+  "slides.tex" 1779205186.28959 7170 a0324c1505a37d9711e6c6011db98453 ""
+  "slides.toc" 1779205188.52759 787 e6884091f8e6ecb7d5434fca13f918ab "pdflatex"
   (generated)
   "slides.aux"
   "slides.log"

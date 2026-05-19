@@ -79,32 +79,32 @@ def S(etat, action):
 	if (action == 'Rester' and norme1(j2) >= 1 and m == 1) or ((action == 'Tirer' or action == 'Doubler') and m == 2):
 		S = []
 		for carte in range(10):
-			pioche = etat[0].copy()
-			j2 = j2.copy()
+			pioche_prime = pioche.copy()
+			j2_prime = j2.copy()
 			if pioche[carte] >= 1:
-				pioche[carte] -= 1
-				j2[carte] += 1
-				S.append([pioche, j1, j2, c, d, 2])
+				pioche_prime[carte] -= 1
+				j2_prime[carte] += 1
+				S.append([pioche_prime, j1, j2_prime, c, d, 2])
 		return S
 	elif action == 'Rester':
 		S = []
 		for carte in range(10):
-			pioche = etat[0].copy()
-			c = c.copy()
+			pioche_prime = pioche.copy()
+			c_prime = c.copy()
 			if pioche[carte] >= 1:
-				pioche[carte] -= 1
-				c[carte] += 1
-				S.append([pioche, j1, j2, c, d, m])
+				pioche_prime[carte] -= 1
+				c_prime[carte] += 1
+				S.append([pioche_prime, j1, j2, c_prime, d, m])
 		return S
 	elif action == 'Doubler' or action == 'Tirer':
 		S = []
 		for carte in range(10):
-			pioche = etat[0].copy()
-			j1 = j1.copy()
+			pioche_prime = pioche.copy()
+			j1_prime = j1.copy()
 			if pioche[carte] >= 1:
-				pioche[carte] -= 1
-				j1[carte] += 1
-				S.append([pioche, j1, j2, c, d, m])
+				pioche_prime[carte] -= 1
+				j1_prime[carte] += 1
+				S.append([pioche_prime, j1_prime, j2, c, d, m])
 		return S
 	else: #Event of a split
 		flag = True
@@ -127,7 +127,6 @@ def est_une_paire(main):
 		return False
 
 def theta_max(etat):
-	DEBUG(etat)
 	j1 = etat[1]
 	j2 = etat[2]
 	c = etat[3]
@@ -135,8 +134,10 @@ def theta_max(etat):
 	m = etat[5]
 	A = ['Rester']
 
+	DEBUG([valeur(j1),valeur(c)])
+
 	if valeur(c) >= 17: #Cas de base
-		return ['Rester' ,retour(etat)]
+		return ['Rester', retour(etat)]
 	else: #Cas récursif
 	
 		if norme1(c) == 1 and ((valeur(j1) <= 20 and m == 1) or (valeur(j2) <= 20 and m == 2) ) :
@@ -146,6 +147,7 @@ def theta_max(etat):
 			if norme1(j2) == 0 and est_une_paire(j1) :
 				A.append('Split')
 		
+		DEBUG(A)
 		A_resultats = {}
 		
 		for action in A:
@@ -168,7 +170,7 @@ def TEST():
 	pioche1 = [4,4,4,4,4,4,4,4,4,16]
 	j11 = [0,0,0,0,1,0,0,0,0,1]
 	j21 = [0]*10
-	c1 = [0,0,0,0,0,0,0,0,0,1]
+	c1 = [0,0,0,0,1,0,0,0,0,0]
 	d1 = [False, False]
 	m1 = 1
 
